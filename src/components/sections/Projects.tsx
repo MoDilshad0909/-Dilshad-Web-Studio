@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, ImageIcon } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,6 +9,24 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
 const projects = [
+  {
+    title: "R.S. International School",
+    category: "School Website • UI/UX • React",
+    description: "Designed and developed a premium, fully responsive website for R.S. International School to establish a strong online presence and simplify the admission enquiry process. Built using real school content, real photographs, and focuses on performance, user experience, and trust-building.",
+    features: [
+      "Admission Enquiry CTA",
+      "WhatsApp Integration",
+      "Click-to-Call Functionality",
+      "Dynamic School Gallery",
+      "Fee Structure",
+      "SEO Friendly"
+    ],
+    tech: ["React", "Vite", "Tailwind CSS", "JavaScript", "Framer Motion", "Lucide React"],
+    image: "/projects/rs_school.png",
+    demoUrl: "https://www.rsinternationalschool.org/",
+    githubUrl: "https://github.com/MoDilshad0909/RS",
+    detailsUrl: "/projects/rs-international-school"
+  },
   {
     title: "ConfirmAI",
     category: "AI + Machine Learning + NLP",
@@ -106,17 +124,31 @@ export function Projects() {
               className={`flex flex-col ${index % 2 !== 0 ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-12 items-center`}
             >
               <div className="w-full lg:w-1/2 perspective-1000">
-                <div className="relative aspect-[4/3] rounded-3xl overflow-hidden glass p-2 group hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 hover:-translate-y-2 hover:rotate-1">
-                  <div className="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors duration-500 z-10" />
-                  <div className="relative w-full h-full rounded-2xl overflow-hidden">
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
+                {project.detailsUrl ? (
+                  <Link href={project.detailsUrl} className="block relative aspect-[4/3] rounded-3xl overflow-hidden glass p-2 group hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 hover:-translate-y-2 hover:rotate-1">
+                    <div className="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors duration-500 z-10" />
+                    <div className="relative w-full h-full rounded-2xl overflow-hidden">
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                    </div>
+                  </Link>
+                ) : (
+                  <div className="relative aspect-[4/3] rounded-3xl overflow-hidden glass p-2 group hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 hover:-translate-y-2 hover:rotate-1">
+                    <div className="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors duration-500 z-10" />
+                    <div className="relative w-full h-full rounded-2xl overflow-hidden">
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
 
               <div className="w-full lg:w-1/2 space-y-6">
@@ -144,13 +176,18 @@ export function Projects() {
                     </span>
                   ))}
                 </div>
-                <div className="flex gap-4 pt-6">
+                <div className="flex flex-wrap gap-4 pt-6">
                   <Link href={project.demoUrl} target="_blank" className={buttonVariants({ className: "rounded-full px-6 hover:shadow-lg hover:shadow-primary/25 transition-all" })}>
-                    Live Demo <ExternalLink className="ml-2 w-4 h-4" />
+                    Live Website <ExternalLink className="ml-2 w-4 h-4" />
                   </Link>
                   <Link href={project.githubUrl} target="_blank" className={buttonVariants({ variant: "outline", className: "rounded-full px-6 glass hover:shadow-lg transition-all" })}>
                     Source Code <FaGithub className="ml-2 w-4 h-4" />
                   </Link>
+                  {project.detailsUrl && (
+                    <Link href={project.detailsUrl} className={buttonVariants({ variant: "secondary", className: "rounded-full px-6 hover:shadow-lg transition-all" })}>
+                      View Screenshots <ImageIcon className="ml-2 w-4 h-4" />
+                    </Link>
+                  )}
                 </div>
               </div>
             </motion.div>

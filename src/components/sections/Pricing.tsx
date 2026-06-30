@@ -2,23 +2,26 @@
 
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 
 const plans = [
   {
     name: "Landing Page",
-    price: "₹40,000",
+    price: "₹6,000",
     description: "Perfect for personal brands and single product showcases.",
     features: ["Single Page Design", "Responsive Layout", "Contact Form", "Basic SEO", "1 Week Delivery"],
     popular: false,
+    whatsappUrl: "https://wa.me/919569248183?text=Hi%20Mo%20Dilshad%2C%0AI'm%20interested%20in%20your%20Landing%20Page%20package%20(%E2%82%B96%2C000).%0AI%20would%20like%20to%20discuss%20my%20project.",
   },
   {
     name: "Premium Website",
-    price: "₹1,20,000",
+    price: "₹12,000",
     description: "Ideal for businesses wanting a complete digital presence.",
     features: ["Up to 10 Pages", "Premium Design", "CMS Integration", "Advanced SEO", "Performance Optimized", "3 Weeks Delivery"],
     popular: true,
+    whatsappUrl: "https://wa.me/919569248183?text=Hi%20Mo%20Dilshad%2C%0AI'm%20interested%20in%20your%20Premium%20Website%20package%20(%E2%82%B912%2C000).%0APlease%20share%20more%20details.",
   },
   {
     name: "Custom Web App",
@@ -26,6 +29,7 @@ const plans = [
     description: "For complex platforms and scalable applications.",
     features: ["Full-Stack Next.js", "Database Integration", "User Authentication", "Dashboard & Admin", "API Integration", "Custom Timeline"],
     popular: false,
+    whatsappUrl: "https://wa.me/919569248183?text=Hi%20Mo%20Dilshad%2C%0AI'm%20interested%20in%20a%20Custom%20Web%20App.%0ALet's%20discuss%20my%20requirements.",
   },
 ];
 
@@ -78,9 +82,17 @@ export function Pricing() {
                   </ul>
                 </CardContent>
                 <CardFooter className="pt-6 pb-10">
-                  <Button className="w-full rounded-full h-12" variant={plan.popular ? "default" : "outline"}>
+                  <a
+                    href={plan.whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={cn(
+                      buttonVariants({ variant: plan.popular ? "default" : "outline" }),
+                      "w-full rounded-full h-12"
+                    )}
+                  >
                     Choose Plan
-                  </Button>
+                  </a>
                 </CardFooter>
               </Card>
             </motion.div>

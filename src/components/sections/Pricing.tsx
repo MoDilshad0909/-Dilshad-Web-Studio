@@ -5,6 +5,7 @@ import { Check } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import { openWhatsApp } from "@/lib/whatsapp";
 
 const plans = [
   {
@@ -13,7 +14,7 @@ const plans = [
     description: "Perfect for personal brands and single product showcases.",
     features: ["Single Page Design", "Responsive Layout", "Contact Form", "Basic SEO", "1 Week Delivery"],
     popular: false,
-    whatsappUrl: "https://wa.me/919569248183?text=Hi%20Mo%20Dilshad%2C%0AI'm%20interested%20in%20your%20Landing%20Page%20package%20(%E2%82%B96%2C000).%0AI%20would%20like%20to%20discuss%20my%20project.",
+    whatsappMessage: "Hi, I'm interested in the ₹6,000 Landing Page package.",
   },
   {
     name: "Premium Website",
@@ -21,7 +22,7 @@ const plans = [
     description: "Ideal for businesses wanting a complete digital presence.",
     features: ["Up to 10 Pages", "Premium Design", "CMS Integration", "Advanced SEO", "Performance Optimized", "3 Weeks Delivery"],
     popular: true,
-    whatsappUrl: "https://wa.me/919569248183?text=Hi%20Mo%20Dilshad%2C%0AI'm%20interested%20in%20your%20Premium%20Website%20package%20(%E2%82%B912%2C000).%0APlease%20share%20more%20details.",
+    whatsappMessage: "Hi, I'm interested in the ₹12,000 Premium Website package.",
   },
   {
     name: "Custom Web App",
@@ -29,7 +30,7 @@ const plans = [
     description: "For complex platforms and scalable applications.",
     features: ["Full-Stack Next.js", "Database Integration", "User Authentication", "Dashboard & Admin", "API Integration", "Custom Timeline"],
     popular: false,
-    whatsappUrl: "https://wa.me/919569248183?text=Hi%20Mo%20Dilshad%2C%0AI'm%20interested%20in%20a%20Custom%20Web%20App.%0ALet's%20discuss%20my%20requirements.",
+    whatsappMessage: "Hi, I need a custom web application. Let's discuss.",
   },
 ];
 
@@ -82,17 +83,15 @@ export function Pricing() {
                   </ul>
                 </CardContent>
                 <CardFooter className="pt-6 pb-10">
-                  <a
-                    href={plan.whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <Button
+                    onClick={() => openWhatsApp(plan.whatsappMessage)}
                     className={cn(
-                      buttonVariants({ variant: plan.popular ? "default" : "outline" }),
+                      plan.popular ? "" : "bg-transparent text-primary hover:bg-primary/10 border border-primary",
                       "w-full rounded-full h-12"
                     )}
                   >
                     Choose Plan
-                  </a>
+                  </Button>
                 </CardFooter>
               </Card>
             </motion.div>

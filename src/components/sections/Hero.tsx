@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import Link from "next/link";
+import { openWhatsApp } from "@/lib/whatsapp";
 
 export function Hero() {
   return (
@@ -45,9 +46,9 @@ export function Hero() {
             <Link href="#projects" className={buttonVariants({ size: "lg", className: "rounded-full w-full sm:w-auto text-base h-14 px-8" })}>
               View My Work <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
-            <Link href="https://wa.me/919569248183" target="_blank" className={buttonVariants({ size: "lg", variant: "outline", className: "rounded-full w-full sm:w-auto text-base h-14 px-8 glass" })}>
+            <Button onClick={() => openWhatsApp()} variant="outline" size="lg" className="rounded-full w-full sm:w-auto text-base h-14 px-8 glass">
               <MessageCircle className="mr-2 h-4 w-4" /> Contact on WhatsApp
-            </Link>
+            </Button>
           </div>
         </motion.div>
 

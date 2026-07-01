@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { openWhatsApp } from "@/lib/whatsapp";
 
 const features = [
   { icon: <MonitorSmartphone className="w-5 h-5" />, title: "Fully Responsive Design" },
@@ -218,9 +219,9 @@ export default function RSProjectPage() {
             Let's build something amazing together. I'm currently available for freelance work.
           </p>
           <div className="relative z-10">
-            <Link href="/#contact" className={buttonVariants({ size: "lg", className: "rounded-full px-8 py-6 text-lg shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all" })}>
+            <Button onClick={() => openWhatsApp()} className={buttonVariants({ size: "lg", className: "rounded-full px-8 py-6 text-lg shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all" })}>
               Get in Touch
-            </Link>
+            </Button>
           </div>
         </motion.div>
       </div>

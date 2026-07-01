@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { openWhatsApp } from "@/lib/whatsapp";
 
 const navLinks = [
   { name: "Services", href: "#services" },
@@ -63,7 +64,7 @@ export function Navbar() {
             <ThemeToggle />
             <Button 
               className="hidden md:flex rounded-full px-6"
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => openWhatsApp()}
             >
               Let's Talk
             </Button>

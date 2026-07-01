@@ -7,7 +7,38 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 
+import { openWhatsApp } from "@/lib/whatsapp";
+
 export function Contact() {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const subject = formData.get("subject") as string;
+    const message = formData.get("message") as string;
+
+    if (!name && !email && !subject && !message) {
+      openWhatsApp();
+      return;
+    }
+
+    const whatsappMessage = `Hi Mo Dilshad,
+
+I'm reaching out from your website contact form.
+
+*Name:* ${name || "N/A"}
+*Email:* ${email || "N/A"}
+*Subject:* ${subject || "N/A"}
+
+*Message:*
+${message || "No message provided."}
+
+Please get back to me.`;
+
+    openWhatsApp(whatsappMessage);
+  };
+
   return (
     <section id="contact" className="py-24 relative overflow-hidden">
       <div className="container mx-auto px-4">
@@ -67,26 +98,26 @@ export function Contact() {
               viewport={{ once: true }}
               className="glass p-8 rounded-3xl"
             >
-              <form className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="name">Your Name</Label>
-                    <Input id="name" placeholder="John Doe" className="bg-background/50 h-12 rounded-xl" />
+                    <Input id="name" name="name" placeholder="John Doe" className="bg-background/50 h-12 rounded-xl" />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="email">Your Email</Label>
-                    <Input id="email" type="email" placeholder="john@example.com" className="bg-background/50 h-12 rounded-xl" />
+                    <Input id="email" name="email" type="email" placeholder="john@example.com" className="bg-background/50 h-12 rounded-xl" />
                   </div>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="subject">Subject</Label>
-                  <Input id="subject" placeholder="Project Inquiry" className="bg-background/50 h-12 rounded-xl" />
+                  <Input id="subject" name="subject" placeholder="Project Inquiry" className="bg-background/50 h-12 rounded-xl" />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="message">Message</Label>
-                  <Textarea id="message" placeholder="Tell me about your project..." className="bg-background/50 min-h-[150px] rounded-xl resize-none" />
+                  <Textarea id="message" name="message" placeholder="Tell me about your project..." className="bg-background/50 min-h-[150px] rounded-xl resize-none" />
                 </div>
-                <Button className="w-full h-12 rounded-xl text-lg font-medium group">
+                <Button type="submit" className="w-full h-12 rounded-xl text-lg font-medium group">
                   Send Message <Send className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </form>
